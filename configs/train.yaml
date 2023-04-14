@@ -1,0 +1,56 @@
+hydra:
+  run:
+    dir: outputs/${data.dataname}/${run_id}
+  job: # automatically go to the job folder (needed for hydra > 1.2 with new behavior)
+    chdir: true
+
+seed: 1234
+
+run_id: ${model.modelname}-${trainer.max_epochs}
+
+model:
+  modelname: basic_model
+  _target_: codes.models.basic.BasicModel
+  lr: 1.0e-1
+
+data:
+  dataname: basic_data
+  _target_: codes.dataset.basic.Datamodule
+  data_path: /path/to/data_dir/
+  batch_size: 64
+  num_workers: 0
+  shuffle: True
+
+trainer:
+  max_epochs: 3
+  accelerator: gpu
+  devices: [0]
+  log_every_n_steps: 1
+  enable_progress_bar: True
+
+callback:
+  progress:
+    _target_: codes.utils.progress.ProgressLogger
+
+  latest_ckpt:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    filename: best-{epoch}
+    every_n_epochs: 1
+    save_top_k: 1
+    save_last: true
+    monitor: "acc@10"
+    mode: max
+
+  last_ckpt:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    filename: latest-{epoch}
+    monitor: step
+    mode: max
+    every_n_epochs: 5
+    save_top_k: -1
+    save_last: false
+
+  lr_monitor:
+    _target_: pytorch_lightning.callbacks.LearningRateMonitor
+    logging_interval: step
+

@@ -1,0 +1,47 @@
+hydra:
+  run:
+    dir: outputs/${data.dataname}/${run_id}
+  job: # automatically go to the job folder (needed for hydra > 1.2 with new behavior)
+    chdir: true
+
+seed: 1234
+
+run_id: ${model.model_path}-${trainer.max_epochs}
+
+model:
+  modelname: RewardModel
+  _target_: models.RewardModel
+  model_path: bert-base-uncased # bert-base-cased , bert-large-cased, bert-base-uncased
+  lr: 1.0e-5
+  model_load_path: /workspace/hyuk/idea4_reward/outputs/${data.dataname}/${run_id}/checkpoints/last.ckpt
+  
+  
+data:
+  dataname: TweReg_over
+  _target_: dataset_pair.Datamodule
+  data_path: /workspace/April/data/tweet_topic/
+  train_data_path: difficulty_epoch_5_valid.csv
+  # /workspace/April/data/Guardians News Articles/epoch_5_valid.csv
+  # /workspace/April/data/Guardians News Articles/difficulty_epoch_5_valid.csv
+  # /workspace/April/data/tweet_topic/epoch_5_valid.csv
+  # /workspace/April/data/tweet_topic/difficulty_epoch_5_valid.csv
+  test_data_path: difficulty_epoch_5_test.csv
+  # /workspace/April/data/Guardians News Articles/epoch_5_test.csv
+  # /workspace/April/data/Guardians News Articles/difficulty_epoch_5_test.csv
+  # /workspace/April/data/tweet_topic/epoch_5_test.csv
+  # /workspace/April/data/tweet_topic/difficulty_epoch_5_test.csv
+  max_seq_length: 128
+  batch_size: 64
+  shuffle: True
+  tokenizer: ${model.model_path}
+
+trainer:
+  auto_select_gpus: true
+  benchmark: False
+  max_epochs: 10
+  accelerator: gpu
+  devices: [0]
+  log_every_n_steps: 1
+  deterministic: False
+  detect_anomaly: False
+  enable_progress_bar: True
