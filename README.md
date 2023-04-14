@@ -1,7 +1,7 @@
 # basic_pl
 basic code for [pytorch lightning 2.0](https://www.pytorchlightning.ai/index.html) and [hydra](https://github.com/facebookresearch/hydra)
 
-There is basic of [model, dataset, utils] python code to Modify for your own purposes.
+There is basic of ```model, dataset, utils``` python code to Modify for your own purposes.
 
 To run train.py you need to check ```configs/train.yaml```
 
