@@ -12,3 +12,5 @@ create a conda environment called ```basic``` using
 conda env create -f basic.yaml
 conda activate basic
 ```
+
+This is for my own personal use, but people are welcome to use it if they need it.
