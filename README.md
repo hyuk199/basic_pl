@@ -6,10 +6,11 @@ There is basic of ```model, dataset, utils``` python code to Modify for your own
 To run train.py you need to check ```configs/train.yaml```
 
 The simplest way to make sure that you have all dependencies in place is to use
-[conda](https://docs.conda.io/projects/conda/en/4.6.1/index.html). You can
-create a conda environment called ```basic_pl``` using. 
+[conda](https://docs.conda.io/projects/conda/en/4.6.1/index.html). 
 
 You can use any name if you want.
+
+I create a conda environment called ```basic_pl```. 
 ```
 conda create -n basic_pl python=3.9
 conda activate basic_pl
