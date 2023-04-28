@@ -11,7 +11,12 @@ run_id: ${model.modelname}-${trainer.max_epochs}
 model:
   modelname: basic_model
   _target_: codes.models.basic.BasicModel
-  lr: 1.0e-1
+  lr: 1.0e-5
+
+# model:
+#   modelname: compare_model
+#   _target_: codes.models.compare.CompareModel
+#   lr: 1.0e-5
 
 data:
   dataname: basic_data
@@ -49,8 +54,4 @@ callback:
     every_n_epochs: 5
     save_top_k: -1
     save_last: false
-
-  lr_monitor:
-    _target_: pytorch_lightning.callbacks.LearningRateMonitor
-    logging_interval: step
 

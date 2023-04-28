@@ -47,8 +47,7 @@ def train(cfg: DictConfig) -> None:
         pl.callbacks.RichProgressBar(),
         instantiate(cfg.callback.progress, metric_monitor=metric_monitor),
         instantiate(cfg.callback.latest_ckpt),
-        instantiate(cfg.callback.last_ckpt),
-        instantiate(cfg.callback.lr_monitor)
+        instantiate(cfg.callback.last_ckpt)
     ]
     logger.info("Callbacks initialized")
 

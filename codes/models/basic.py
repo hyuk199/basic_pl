@@ -37,7 +37,7 @@ class BasicModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         output = self.forward(batch["inputs"])
         metrics, loss = self.compute_metrics(output, batch["targets"])
-        self.log_dict(metrics, on_step=True, prog_bar=True)
+        self.log_dict(metrics)
         return loss
 
     # ----- Eval Steps -----
@@ -61,7 +61,7 @@ class BasicModel(pl.LightningModule):
         return metrics
 
     def on_test_epoch_end(self):
-        self.log_dict(self.output_dico(self.test_step_outputs), on_epoch = True)
+        self.log_dict(self.output_dico(self.test_step_outputs))
         self.test_step_outputs.clear()
 
     def output_dico(self, outputs:List)-> Dict:
