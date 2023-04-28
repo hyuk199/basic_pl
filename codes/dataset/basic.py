@@ -76,7 +76,7 @@ class Datamodule(pl.LightningDataModule):
                     self.valid_dataset, 
                     batch_size = self.batch_size, 
                     num_workers = self.num_workers,
-                    shuffle=self.shuffle
+                    shuffle=False
                 )
 
 
@@ -85,5 +85,5 @@ class Datamodule(pl.LightningDataModule):
                     self.test_dataset, 
                     batch_size = self.batch_size, 
                     num_workers = self.num_workers,
-                    shuffle=self.shuffle
+                    shuffle=False
                 )

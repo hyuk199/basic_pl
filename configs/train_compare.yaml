@@ -9,13 +9,13 @@ seed: 1234
 run_id: ${model.modelname}-${trainer.max_epochs}
 
 model:
-  modelname: basic_model
-  _target_: codes.models.basic.BasicModel
+  modelname: compare_model
+  _target_: codes.models.compare.CompareModel
   lr: 1.0e-5
 
 data:
-  dataname: basic_data
-  _target_: codes.dataset.basic.Datamodule
+  dataname: compare_data
+  _target_: codes.dataset.compare.Datamodule
   data_path: /path/to/data_dir/
   batch_size: 64
   num_workers: 0
