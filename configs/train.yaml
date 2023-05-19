@@ -38,7 +38,7 @@ callback:
     every_n_epochs: 1
     save_top_k: 1
     save_last: true
-    monitor: "acc@10"
+    monitor: "acc@10"  # Dont forget to set it
     mode: max
 
   last_ckpt:
