@@ -37,14 +37,14 @@ class ProgressLogger(Callback):
             if dico_name in losses_dict:
                 metric = losses_dict[dico_name].item()
                 metric = metric_format.format(metric)
-                metric = f"{metric_name} {metric}"
+                metric = f" \'{metric_name}\': {metric},"
                 metrics_str.append(metric)
 
         if len(metrics_str) == 0:
             return
 
         memory = f"Memory {psutil.virtual_memory().percent}%"
-        line = line + ": " + "   ".join(metrics_str) + "   " + memory
+        line = line + ": { " + " ".join(metrics_str) + " } " + memory
         logger.info(line)
 
     def on_test_epoch_end(self, trainer: Trainer, pl_module: LightningModule, **kwargs) -> None:
